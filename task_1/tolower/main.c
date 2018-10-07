@@ -16,7 +16,6 @@
 //количество строк, содержащихся в результирующем массиве.
 
 #define SIZE_BUFFER 80;
-
 char lower(char c){
     if('A' <= c && c <= 'Z')
         return c - ('A' - 'a');
@@ -44,7 +43,6 @@ int toLower(char **text, int count, char **result){
     int n = count;
     return n;
 }
-
 
 void printText(register char** text, const int size){
     for(int i = 0; i < size; i++){
