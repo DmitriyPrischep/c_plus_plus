@@ -70,12 +70,17 @@ char** readText(char** text, int* countLine){
         text[indexLine][i++] = c;
         if(c == '\n'){
             text[indexLine][i - 1] = '\0';
-            text[indexLine] = (char*)realloc(text[indexLine], i * sizeof(char));
-            if(!text[indexLine])
+
+            char* temp = NULL;
+            temp = (char*)realloc(text[indexLine], i * sizeof(char));
+            if(!temp)
                 return NULL;
-            text = (char**)realloc(text,  (++indexLine + 1)* sizeof(char*));
-            if(!text)
+            text[indexLine] = temp;
+            char** newText = NULL;
+            newText = (char**)realloc(text,  (++indexLine + 1)* sizeof(char*));
+            if(!newText)
                 return NULL;
+            text = newText;
 
             size = SIZE_BUFFER;
             text[indexLine] = (char*)calloc(size, sizeof(char));
@@ -85,9 +90,11 @@ char** readText(char** text, int* countLine){
         }
         if(i == size){
             size *= 2;
-            text[indexLine] = (char*)realloc(text[indexLine], size * sizeof(char));
-            if(!text[indexLine])
+            char *temp = NULL;
+            temp = (char*)realloc(text[indexLine], size * sizeof(char));
+            if(!temp)
                 return NULL;
+            text[indexLine] = temp;
         }
     }
     char *temp = (char*)realloc(text[indexLine], ++i * sizeof(char));
